@@ -1,5 +1,6 @@
 const express = require('express');
 const dbcon = require('./db');
+const cors = require('cors');
 
 // another route
 const productRoute = require('./routes/productRoute');
@@ -7,6 +8,9 @@ const productRoute = require('./routes/productRoute');
 const app = express();
 
 const port = process.env.port || 3000;
+
+// middleware
+app.use('/api', cors());
 
 // GET 
 app.use('/api/products', productRoute);
