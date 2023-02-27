@@ -1,6 +1,7 @@
 const express = require('express');
 const dbcon = require('./db');
 const cors = require('cors');
+const bodyParser = require('body-parser');
 
 // another route
 const productRoute = require('./routes/productRoute');
@@ -11,6 +12,7 @@ const port = process.env.port || 3000;
 
 // middleware
 app.use('/api', cors());
+app.use(bodyParser.json());
 
 // GET 
 app.use('/api/products', productRoute);
