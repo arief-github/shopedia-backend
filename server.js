@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 // another route
 const productRoute = require('./routes/productRoute');
 const userRoute = require('./routes/userRoute');
+const orderRoute = require('./routes/orderRoute');
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use(bodyParser.json());
 // GET 
 app.use('/api/products', productRoute);
 app.use('/api/users', userRoute);
+app.use('/api/orders', orderRoute);
 
 app.get('/', (req, res) => {
     res.type('text/plain')
