@@ -51,4 +51,28 @@ router.post("/placeorder", async(req, res) => {
     }
 })
 
+router.post("/getordersbyuserid", (req, res) => {
+    const userid = req.body.userid;
+
+    Order.find({ userid: userid }, ( err, docs ) => {
+        if(err) {
+            return res.status(400).json({ message: 'Something went wrong' })
+        } else {
+            res.send(docs)
+        }
+    })
+})
+
+router.post("/getorderbyid", (req, res) => {
+    const orderid = req.body.orderid;
+
+    Order.find({ _id: orderid }, ( err, docs ) => {
+        if(err) {
+            return res.status(400).json({ message: 'Something went wrong' })
+        } else {
+            res.send(docs[0])
+        }
+    })
+})
+
 module.exports = router;
