@@ -80,8 +80,27 @@ router.post('/update', (req, res) => {
             })
         }
     })
+})
 
-    
+router.get('/getallusers', (req, res) => {
+    User.find({}, (err, docs) => {
+        if(err) {
+            return res.status(400).json({ message: 'Something went wrong' })
+        } else {
+            res.send(docs)
+        }
+    })
+});
+
+
+router.post("/deleteuser", (req, res) => {
+    User.findByIdAndRemove(req.body.userid, (err) => {
+        if(err) {
+            return res.status(400).json({ message: 'Something went wrong' })
+        } else {
+            res.send('User deleted successfully')
+        }
+    })
 })
 
 module.exports = router;
