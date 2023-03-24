@@ -49,7 +49,7 @@ router.post("/placeorder", async(req, res) => {
     } else {
         res.status(400).json({message:"Payment Failed"})
     }
-})
+});
 
 router.post("/getordersbyuserid", (req, res) => {
     const userid = req.body.userid;
@@ -61,7 +61,7 @@ router.post("/getordersbyuserid", (req, res) => {
             res.send(docs)
         }
     })
-})
+});
 
 router.post("/getorderbyid", (req, res) => {
     const orderid = req.body.orderid;
@@ -71,6 +71,16 @@ router.post("/getorderbyid", (req, res) => {
             return res.status(400).json({ message: 'Something went wrong' })
         } else {
             res.send(docs[0])
+        }
+    })
+});
+
+router.get("/getallorders", (req, res) => {
+    Order.find({} , (err, docs) => {
+        if(err) {
+            return res.status(400).json({ message: 'Something Went Wrong' })
+        } else {
+            res.send(docs)
         }
     })
 })
