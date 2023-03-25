@@ -66,4 +66,42 @@ router.post('/deleteproduct', (req, res) => {
     })
 });
 
+router.post('/addproduct', (req, res) => {
+    const { product } = req.body;
+
+    const productModel = new Product({
+        name : product.name , 
+        price : product.price,
+        description : product.description,
+        countInStock : product.countInStock ,
+        image : product.image ,
+        category : product.category
+    });
+
+    productModel.save((err) => {
+        if(err) {
+            return res.status(400).json({ message: 'Something Went Wrong' })
+        } else {
+            res.send('Product Added Successfully')
+        }
+    })
+});
+
+router.post('/updateproduct', (req, res) => {
+    Product.findByIdAndUpdate(req.body.productid, {
+        name : req.body.updatedproduct.name,
+        price : req.body.updatedproduct.price,
+        category : req.body.updatedproduct.category,
+        description : req.body.updatedproduct.description,
+        countInStock : req.body.updatedproduct.countInStock,
+        image : req.body.updatedproduct.image
+    }, (err) => {
+        if(err) {
+            return res.status(400).json({ message: `Something went wrong ${err}` })
+        } else {
+            res.send('Product Updated Successfully')
+        }
+    })
+})
+
 module.exports = router;
